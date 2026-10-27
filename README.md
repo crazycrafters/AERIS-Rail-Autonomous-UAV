@@ -4,6 +4,10 @@ Modular research software for railway UAV inspection. **Simulation only:** no ai
 
 Requires Python 3.10+; no external dependencies.
 
+## Build the complete project
+
+Start with the [complete project execution plan](docs/project_execution_plan.md). It covers UAV imagery, annotation, dataset splits, example YOLO image training/inference commands, where trained weights appear, image-backend implementation, SITL control, evidence integration, energy/docking, and evaluation. The [image dataset YAML](examples/image_detection/data.yaml) is a template only. The optional image commands require your real data and a separately installed vision framework; no trained image weights are included.
+
 ## Run and test
 
 ```sh

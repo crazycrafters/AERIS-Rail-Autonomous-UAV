@@ -1,5 +1,7 @@
 # AERIS-Rail implementation and training guide
 
+For a complete ordered action plan, image-label examples, optional YOLO training commands, and deliverables, start with the [project execution plan](project_execution_plan.md).
+
 ## 1. What exists and what comes next
 
 The repository implements a simulation-first development path. All commands below run from the repository root using Python 3.10 or newer. No external Python packages, services, GPU, secrets, or aircraft are required for the implemented examples.

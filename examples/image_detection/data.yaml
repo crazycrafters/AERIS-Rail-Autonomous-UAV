@@ -1,0 +1,13 @@
+# TEMPLATE ONLY: replace path with your licensed, annotated dataset root.
+# No images, labels, or trained image-model weights are included in this repo.
+path: /workspace/datasets/aeris-rail
+train: images/train
+val: images/val
+test: images/test
+
+# Class IDs must match every annotation file. Freeze this mapping before training.
+# A fastener slot is an expected component location visible in the image.
+# These classes are illustrative; confirm the scope with an asset specialist.
+names:
+  0: fastener_present
+  1: fastener_missing

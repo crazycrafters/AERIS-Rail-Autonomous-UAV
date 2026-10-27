@@ -1,2 +1,8 @@
 __pycache__/
 outputs/
+
+# Optional image-training environment and large/private artifacts
+.venv/
+datasets/
+*.pt
+*.onnx
