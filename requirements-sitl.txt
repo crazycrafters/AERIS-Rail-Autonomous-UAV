@@ -1,0 +1,3 @@
+# Optional local simulator tooling; this pins the inspected gRPC-style API.
+# New native MAVSDK major versions have a different API.
+mavsdk==3.17.4

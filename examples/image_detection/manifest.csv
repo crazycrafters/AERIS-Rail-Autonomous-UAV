@@ -1,0 +1,4 @@
+image,site,session,asset_group,split
+images/train/siteA_0001.jpg,site-A,site-A-day-1,site-A-asset-1,train
+images/val/siteB_0001.jpg,site-B,site-B-day-1,site-B-asset-1,val
+images/test/siteC_0001.jpg,site-C,site-C-day-1,site-C-asset-1,test

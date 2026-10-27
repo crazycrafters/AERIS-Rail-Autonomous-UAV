@@ -2,11 +2,15 @@
 
 This guide explains what you must obtain, what to implement, how to train the image models, and what evidence is required before moving to the next stage. It is a development plan, not a claim that those stages are already implemented. The immediate goal is **offline detection from UAV railway images**. Aircraft integration follows only after that works.
 
+## Implementation update
+
+The executable [implementation guide](implementation_guide.md) is now the command reference. `aeris/vision/` implements dataset auditing, YOLO training to `best.pt`, evaluation, still-image inference, embedding extraction and evidence replay. `aeris/report.py` exports a static report. Optional PX4 SITL scripts are provided but not flight-validated. The sections below retain the broader project/research plan; use the implementation guide for current code paths.
+
 ## 1. Start here: repository status and first objective
 
-The current code has a working abstract mission simulator and a trainable normality baseline for numeric feature vectors. It does **not** have an image encoder, YOLO training wrapper, trained railway image weights, camera driver, ROS 2 node, PX4/ArduPilot adapter, dashboard, or physical docking controller.
+The current code has a working abstract mission simulator and a trainable normality baseline for numeric feature vectors. It now has optional image embedding extraction, a YOLO training/inference wrapper and static reports. It does **not** include trained railway image weights, a live camera driver, ROS 2 integration, validated real-time flight coupling, a review database, or physical docking control.
 
-The existing `aeris/detection/offline.py` is not the model to train directly on images. An image-based model must be trained with an external vision framework and integrated through a new backend. The optional framework commands below are proposed next-stage commands; they were not executed during documentation work. The supplied YAML is a template, not a dataset.
+The existing `aeris/detection/offline.py` is not the model to train directly on images. An image-based model must be trained with the optional vision framework and your imagery; use `aeris.vision` as documented in the implementation guide. The direct framework commands below are baseline planning examples; the newer wrapper was smoke-tested separately on generated geometry, not railway data. The supplied YAML is a template, not a dataset.
 
 First produce this artifact chain:
 
@@ -118,7 +122,7 @@ class_id center_x center_y width height
 
 Coordinates are normalized by image width/height and must describe a nonzero box inside the image. IDs must match the zero-based mapping in [the YAML template](../examples/image_detection/data.yaml). Image/label stems must match. Store image/asset identity and defect-confirmation details in the manifest, not in class IDs.
 
-Before training validate decodability, dimensions, missing/extra labels, class ranges, box bounds, duplicate hashes, site/asset overlap between splits, and annotation completeness. Visually render a stratified sample of exported labels. A dataset validator is **not implemented** yet; implement it as the next code task before large training runs.
+Before training validate decodability, dimensions, missing/extra labels, class ranges, box bounds, duplicate hashes, site/asset overlap between splits, and annotation completeness. Visually render a stratified sample of exported labels. The validator is now implemented as `python -m aeris.vision validate`; see the implementation guide for its manifest and accepted layout.
 
 ## 6. Train the supervised image detector
 
@@ -181,7 +185,7 @@ outputs/image_detector/baseline/weights/best.pt
 outputs/image_detector/baseline/weights/last.pt
 ```
 
-`best.pt` is selected using the framework's validation criterion; `last.pt` is the latest saved training state. Confirm actual outputs and selection semantics for your pinned framework. **Neither file exists in the repository today.** These are the image-model weights you will obtain after training on your dataset. Keep them in versioned artifact storage, not ordinary Git. Record SHA-256 hashes and the run/data configuration beside them.
+`best.pt` is selected using the framework's validation criterion; `last.pt` is the latest saved training state. Confirm actual outputs and selection semantics for your pinned framework. **No trained railway weights are included. A synthetic smoke test produced local ignored weights only.** These are the image-model weights you will obtain after training on your dataset. Keep them in versioned artifact storage, not ordinary Git. Record SHA-256 hashes and the run/data configuration beside them.
 
 ## 7. Evaluate, choose a threshold, and run image inference
 
@@ -205,7 +209,7 @@ Review overlays and failure examples, including healthy unusual surfaces and unr
 
 ## 8. Implement the image inference backend in this repository
 
-Proposed new files, **not implemented yet**:
+Earlier proposed file layout (actual implemented equivalents are in `aeris/vision/`; live capture/evidence services remain future work):
 
 ```text
 aeris/detection/images.py           image decoding and preprocessing

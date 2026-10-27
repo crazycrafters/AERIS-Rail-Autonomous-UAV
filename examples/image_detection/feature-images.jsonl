@@ -1,0 +1,5 @@
+{"id":"healthy-train-1","site":"site-A","day":"day-1","split":"train","segment":0,"label":"normal","quality_ok":true,"image":"/replace/healthy-crop-1.jpg"}
+{"id":"healthy-train-2","site":"site-A","day":"day-1","split":"train","segment":1,"label":"normal","quality_ok":true,"image":"/replace/healthy-crop-2.jpg"}
+{"id":"healthy-validation","site":"site-B","day":"day-2","split":"validation","segment":0,"label":"normal","quality_ok":true,"image":"/replace/healthy-crop-3.jpg"}
+{"id":"healthy-test","site":"site-C","day":"day-3","split":"test","segment":0,"label":"normal","quality_ok":true,"image":"/replace/healthy-crop-4.jpg"}
+{"id":"anomaly-test","site":"site-C","day":"day-3","split":"test","segment":1,"label":"anomaly","quality_ok":true,"image":"/replace/anomalous-crop-1.jpg"}
