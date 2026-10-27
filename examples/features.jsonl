@@ -1,0 +1,11 @@
+{"id": "train-0", "site": "synthetic-site-a", "day": "synthetic", "split": "train", "segment": 0, "label": "normal", "quality_ok": true, "features": [-0.2, -0.1]}
+{"id": "train-1", "site": "synthetic-site-a", "day": "synthetic", "split": "train", "segment": 1, "label": "normal", "quality_ok": true, "features": [-0.1, -0.05]}
+{"id": "train-2", "site": "synthetic-site-a", "day": "synthetic", "split": "train", "segment": 2, "label": "normal", "quality_ok": true, "features": [0.1, 0.05]}
+{"id": "train-3", "site": "synthetic-site-a", "day": "synthetic", "split": "train", "segment": 3, "label": "normal", "quality_ok": true, "features": [0.2, 0.1]}
+{"id": "validation-0", "site": "synthetic-site-b", "day": "synthetic", "split": "validation", "segment": 0, "label": "normal", "quality_ok": true, "features": [-0.3, -0.15]}
+{"id": "validation-1", "site": "synthetic-site-b", "day": "synthetic", "split": "validation", "segment": 1, "label": "normal", "quality_ok": true, "features": [0, 0.0]}
+{"id": "validation-2", "site": "synthetic-site-b", "day": "synthetic", "split": "validation", "segment": 2, "label": "normal", "quality_ok": true, "features": [0.3, 0.15]}
+{"id": "test-0", "site": "synthetic-site-c", "day": "synthetic", "split": "test", "segment": 0, "label": "normal", "quality_ok": true, "features": [0.05, 0.025]}
+{"id": "test-1", "site": "synthetic-site-c", "day": "synthetic", "split": "test", "segment": 1, "label": "anomaly", "quality_ok": true, "features": [3, 1.5]}
+{"id": "test-2", "site": "synthetic-site-c", "day": "synthetic", "split": "test", "segment": 2, "label": "normal", "quality_ok": true, "features": [0.15, 0.075]}
+{"id": "test-3", "site": "synthetic-site-c", "day": "synthetic", "split": "test", "segment": 3, "label": "anomaly", "quality_ok": true, "features": [4, 2.0]}
