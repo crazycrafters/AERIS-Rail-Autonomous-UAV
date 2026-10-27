@@ -20,6 +20,8 @@ For collection geometry, annotation policy, research design, and acceptance crit
 
 The smoke detector produced zero detection accuracy after one epoch. Its weights prove the training/inference commands work, not that railway defects can be detected. No real imagery or trained railway model was available for evaluation.
 
+For CPU/camera selection, flight-controller wiring, power and OS choices, read the [UAV hardware and connection guide](uav_hardware_and_connections.md) and fill in the [BOM worksheet](../examples/hardware/prototype_bom.csv).
+
 ## 1. Get the code and choose the local environment
 
 Suggested environment: Linux with Python 3.11 or 3.12. The image workflow was exercised with Python 3.12, CPU PyTorch 2.5.1, torchvision 0.20.1, and the direct dependency pins in `requirements-vision.txt`. macOS/Windows installation and GPU execution were not validated here.

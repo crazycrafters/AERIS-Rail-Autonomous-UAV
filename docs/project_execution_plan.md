@@ -46,6 +46,9 @@ Set acceptance targets before reviewing test results. No universal mAP or confid
 
 ## 3. Resources and hardware decisions
 
+Use the [hardware and connection guide](uav_hardware_and_connections.md) for the proposed architecture, component families, optical/power calculations, wiring boundaries, supported-OS decisions and companion integration steps. The [BOM worksheet](../examples/hardware/prototype_bom.csv) records the exact parts and interface checks still needed.
+
+
 | Component | What you need initially | What to record |
 |---|---|---|
 | Imagery | Licensed UAV photos/video or authorized closed-course captures | License, site, date, collection method, intended use |

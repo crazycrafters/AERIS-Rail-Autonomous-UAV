@@ -8,6 +8,10 @@ The core simulator requires Python 3.10+ with no external dependencies. The opti
 
 Start with the [complete project execution plan](docs/project_execution_plan.md). It covers UAV imagery, annotation, dataset splits, example YOLO image training/inference commands, where trained weights appear, image-backend implementation, SITL control, evidence integration, energy/docking, and evaluation. The [image dataset YAML](examples/image_detection/data.yaml) is a template only. The optional image commands require your real data and a separately installed vision framework; no trained image weights are included.
 
+## Build and connect a UAV
+
+Read the [UAV hardware and connection guide](docs/uav_hardware_and_connections.md) for flight-controller/companion roles, Jetson versus Raspberry Pi, camera/lens choices, OS, power and UART/USB connection diagrams, assembly sequence, and AERIS integration. Fill in the [BOM worksheet](examples/hardware/prototype_bom.csv) before selecting an airframe. These are prototype recommendations; hardware compatibility and flight integration have not been validated.
+
 ## Train an image detector after annotation
 
 Follow the [step-by-step implementation guide](docs/implementation_guide.md), including environment installation, annotation manifest and dataset audit. Then run, adjusting your dataset path:
