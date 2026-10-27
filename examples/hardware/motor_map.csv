@@ -1,0 +1,5 @@
+physical_location,firmware_airframe,firmware_motor_identity,actual_output_connector,esc_model,required_rotation_from_official_diagram,observed_rotation_props_removed,propeller_part_number,reviewer,status
+front-left,,,,,,,,,
+front-right,,,,,,,,,
+rear-left,,,,,,,,,
+rear-right,,,,,,,,,

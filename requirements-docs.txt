@@ -1,0 +1,2 @@
+# Optional authoring dependency; readers need only a browser for generated HTML.
+Markdown==3.7

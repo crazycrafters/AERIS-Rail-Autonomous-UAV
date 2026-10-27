@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AERIS student build manual: from boxes of parts to an inspection prototype</title><style>body{font-family:system-ui,sans-serif;max-width:1080px;margin:auto;padding:1.5rem;line-height:1.6;color:#182338}
+h1,h2,h3{line-height:1.25}h2{margin-top:2rem;border-top:1px solid #ddd;padding-top:1rem}
+a{color:#184f8e}table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border:1px solid #c8ced7;padding:.5rem;text-align:left;vertical-align:top}
+pre{background:#f2f4f7;padding:1rem;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.9em}
+figure{margin:1.5rem 0}figure svg{width:100%;height:auto}figcaption{font-size:.9em;color:#46546a}nav{background:#edf3fc;padding:1rem}
+@media print{body{max-width:none;padding:0;font-size:10pt}nav{display:none}a{color:inherit}figure,tr{break-inside:avoid}h2,h3{break-after:avoid}pre{border:1px solid #ddd}}</style></head><body><nav>Printable AERIS build manual. Use your browser’s Print → Save as PDF. <a href="student_build_manual.html">Student build</a> · <a href="custom_airframe_and_controller.html">Custom hardware development</a></nav><div class="toc">
+<ul>
+<li><a href="#aeris-student-build-manual-from-boxes-of-parts-to-an-inspection-prototype">AERIS student build manual: from boxes of parts to an inspection prototype</a><ul>
+<li><a href="#1-understand-the-machine-in-plain-language">1. Understand the machine in plain language</a></li>
+<li><a href="#2-choose-one-build-path-not-a-mixture-of-unrelated-shopping-lists">2. Choose one build path, not a mixture of unrelated shopping lists</a><ul>
+<li><a href="#path-a-your-first-aircraft">Path A — your first aircraft</a></li>
+<li><a href="#minimum-packing-list-categories-for-a-conventional-quad-kit">Minimum packing-list categories for a conventional quad kit</a></li>
+<li><a href="#path-b-add-a-recordingai-payload">Path B — add a recording/AI payload</a></li>
+<li><a href="#path-c-custom-kit-or-custom-controller">Path C — custom kit or custom controller</a></li>
+</ul>
+</li>
+<li><a href="#3-organize-your-project-before-spending-money">3. Organize your project before spending money</a></li>
+<li><a href="#4-tools-and-supplies">4. Tools and supplies</a></li>
+<li><a href="#5-mechanical-assembly-build-a-frame-not-a-pile-of-modules">5. Mechanical assembly: build a frame, not a pile of modules</a></li>
+<li><a href="#6-motherboard-details-which-board-is-which">6. Motherboard details: which board is which?</a><ul>
+<li><a href="#flight-controller-board">Flight-controller board</a></li>
+<li><a href="#companion-boardcarrier">Companion board/carrier</a></li>
+<li><a href="#escpower-boards">ESC/power boards</a></li>
+</ul>
+</li>
+<li><a href="#7-make-the-wire-schedule-before-connecting-the-wires">7. Make the wire schedule before connecting the wires</a><ul>
+<li><a href="#connection-order">Connection order</a></li>
+<li><a href="#power-diagram">Power diagram</a></li>
+</ul>
+</li>
+<li><a href="#8-companion-connection-usb-first">8. Companion connection: USB first</a></li>
+<li><a href="#9-first-electrical-checks-with-the-instructor">9. First electrical checks, with the instructor</a></li>
+<li><a href="#10-install-firmware-and-configure-the-base-aircraft">10. Install firmware and configure the base aircraft</a></li>
+<li><a href="#11-mixing-how-four-motors-work-together">11. “Mixing”: how four motors work together</a><ul>
+<li><a href="#motor-mapping-procedure-propellers-removed">Motor mapping procedure — propellers removed</a></li>
+</ul>
+</li>
+<li><a href="#12-configure-and-test-the-camera-payload-on-the-bench">12. Configure and test the camera payload on the bench</a></li>
+<li><a href="#13-bring-aeris-into-the-build">13. Bring AERIS into the build</a></li>
+<li><a href="#14-ground-tests-before-flight">14. Ground tests before flight</a></li>
+<li><a href="#15-first-flight-is-a-different-activity-from-assembly">15. First flight is a different activity from assembly</a></li>
+<li><a href="#16-troubleshooting-for-beginners">16. Troubleshooting for beginners</a></li>
+<li><a href="#17-what-this-manual-cannot-honestly-supply-yet">17. What this manual cannot honestly supply yet</a></li>
+<li><a href="#18-official-instructions-to-keep-beside-this-manual">18. Official instructions to keep beside this manual</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="aeris-student-build-manual-from-boxes-of-parts-to-an-inspection-prototype">AERIS student build manual: from boxes of parts to an inspection prototype</h1>
+<p><strong>Start here if you have never built a drone.</strong> You said you have no hardware yet. This manual uses a supported quadcopter kit, not a homemade flight-controller PCB, as the first aircraft. A separate <a href="custom_airframe_and_controller.html">custom airframe/controller development guide</a> explains what making those parts yourself involves.</p>
+<p>The reference family is a <strong>Holybro X500 V2-class development kit offered with a Pixhawk 6C-class controller</strong>, if an actually available kit configuration has compatible documentation and enough payload allowance. This is a procurement candidate, not a purchased/tested configuration. Check the exact current kit contents, airframe instructions and controller revision before ordering. Do not add a heavy AI computer to a kit merely because it physically fits.</p>
+<p>First milestone: build and configure the basic kit, take good images under operator supervision, and run detection offline. Add onboard AI only after measuring its mass, power and cooling requirements. For a school project, use a teacher/qualified builder for electrical work, battery charging, motor commissioning and flight instruction. Propellers stay removed for all wiring and motor-output identification below.</p>
+<h2 id="1-understand-the-machine-in-plain-language">1. Understand the machine in plain language</h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What it does</th>
+<th>What it does not do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frame</td>
+<td>Holds the aircraft together</td>
+<td>Does not decide how to fly</td>
+</tr>
+<tr>
+<td>Motor + propeller</td>
+<td>Creates thrust</td>
+<td>Cannot be powered directly from a controller signal pin</td>
+</tr>
+<tr>
+<td>ESC</td>
+<td>Switches battery power to a motor according to commands</td>
+<td>Is not the flight-controller computer</td>
+</tr>
+<tr>
+<td>Flight controller</td>
+<td>Reads sensors and commands the ESCs to stabilize/fly</td>
+<td>Does not normally run the railway image model</td>
+</tr>
+<tr>
+<td>Power module/distribution</td>
+<td>Routes rated power; may measure voltage/current</td>
+<td>Does not automatically provide every device's required voltage</td>
+</tr>
+<tr>
+<td>GNSS/compass</td>
+<td>Supports navigation/heading estimation</td>
+<td>Does not make every place safe or provide reliable indoor navigation</td>
+</tr>
+<tr>
+<td>Radio receiver + transmitter</td>
+<td>Gives the operator a supported control path</td>
+<td>Is separate from the AI/cloud link</td>
+</tr>
+<tr>
+<td>Companion computer</td>
+<td>Runs Linux, records images and runs AERIS</td>
+<td>Must not replace the controller's stabilization loops</td>
+</tr>
+<tr>
+<td>Camera + lens</td>
+<td>Collects inspection evidence</td>
+<td>Cannot see a detail that is too small/blurred in the image</td>
+</tr>
+<tr>
+<td>Ground station</td>
+<td>Configures and monitors the controller</td>
+<td>Is not the controller's real-time motor loop</td>
+</tr>
+</tbody>
+</table>
+<figure><svg xmlns="http://www.w3.org/2000/svg" width="1100" height="720" viewBox="0 0 1100 720" role="img" aria-labelledby="title desc"><title id="title">AERIS: power and data belong to different paths</title><desc id="desc">Conceptual wiring for a kit aircraft with a separate flight controller and companion computer.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs><style>text{font-family:Arial,sans-serif;fill:#162337}.title{font-size:26px;font-weight:bold}.label{font-size:18px;font-weight:bold}.small{font-size:15px}.note{font-size:17px}</style><rect width="100%" height="100%" fill="#fff"/><text x="30" y="42" class="title">AERIS: power and data belong to different paths</text><rect x="30" y="95" width="250" height="100" rx="12" fill="#fff0dd" stroke="#52647b" stroke-width="2"/><text x="45" y="123" class="label" style="font-size:18.0px">Flight battery</text><text x="45" y="148" class="small" style="font-size:15.0px">Use kit-matched pack</text><text x="45" y="170" class="small" style="font-size:15.0px">Connect only after checks</text><rect x="370" y="95" width="330" height="100" rx="12" fill="#fff0dd" stroke="#52647b" stroke-width="2"/><text x="385" y="123" class="label" style="font-size:18.0px">Rated power distribution</text><text x="385" y="148" class="small" style="font-size:15.0px">Motor power + approved module</text><text x="385" y="170" class="small" style="font-size:15.0px">Regulator input must match battery</text><polyline points="280,145 370,145" fill="none" stroke="#b94621" stroke-width="3" marker-end="url(#arrow)"/><rect x="800" y="90" width="265" height="110" rx="12" fill="#fff0dd" stroke="#52647b" stroke-width="2"/><text x="815" y="118" class="label" style="font-size:18.0px">ESCs + four motors</text><text x="815" y="143" class="small" style="font-size:15.0px">High-current power branch</text><text x="815" y="165" class="small" style="font-size:12.2px">Controller sends signals separately</text><polyline points="700,145 800,145" fill="none" stroke="#b94621" stroke-width="3" marker-end="url(#arrow)"/><rect x="360" y="280" width="330" height="115" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="375" y="308" class="label" style="font-size:18.0px">Flight controller / Pixhawk</text><text x="375" y="333" class="small" style="font-size:15.0px">PX4 firmware; stabilization</text><text x="375" y="355" class="small" style="font-size:15.0px">Approved power-module input</text><text x="375" y="377" class="small" style="font-size:15.0px">Independent operator control</text><polyline points="500,195 500,280" fill="none" stroke="#b94621" stroke-width="3" marker-end="url(#arrow)"/><polyline points="690,310 740,310 740,225 930,225 930,200" fill="none" stroke="#2861a8" stroke-width="3" marker-end="url(#arrow)"/><rect x="30" y="280" width="250" height="115" rx="12" fill="#e9f6ed" stroke="#52647b" stroke-width="2"/><text x="45" y="308" class="label" style="font-size:18.0px">GNSS + RC receiver</text><text x="45" y="333" class="small" style="font-size:15.0px">Use supported kit cables</text><text x="45" y="355" class="small" style="font-size:11.8px">Separate navigation/operator links</text><polyline points="280,335 360,335" fill="none" stroke="#32804b" stroke-width="3" marker-end="url(#arrow)"/><rect x="800" y="280" width="265" height="115" rx="12" fill="#fff0dd" stroke="#52647b" stroke-width="2"/><text x="815" y="308" class="label" style="font-size:18.0px">Dedicated DC/DC</text><text x="815" y="333" class="small" style="font-size:15.0px">Carrier-specified output</text><text x="815" y="355" class="small" style="font-size:15.0px">Never use TELEM power for AI</text><polyline points="650,195 750,250 930,250 930,280" fill="none" stroke="#b94621" stroke-width="3" marker-end="url(#arrow)"/><rect x="360" y="490" width="330" height="110" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="375" y="518" class="label" style="font-size:18.0px">Companion computer</text><text x="375" y="543" class="small" style="font-size:15.0px">Linux + AERIS inference</text><text x="375" y="565" class="small" style="font-size:15.0px">Camera evidence + local storage</text><polyline points="930,395 930,545 690,545" fill="none" stroke="#b94621" stroke-width="3" marker-end="url(#arrow)"/><polyline points="515,395 515,490" fill="none" stroke="#2861a8" stroke-width="3" marker-end="url(#arrow)"/><text x="535" y="445" class="small">USB data first; UART only after pin/level checks</text><rect x="30" y="490" width="250" height="110" rx="12" fill="#e9f6ed" stroke="#52647b" stroke-width="2"/><text x="45" y="518" class="label" style="font-size:18.0px">Inspection camera</text><text x="45" y="543" class="small" style="font-size:15.0px">Supported USB 3 model</text><text x="45" y="565" class="small" style="font-size:15.0px">Optics + exposure matter</text><polyline points="280,545 360,545" fill="none" stroke="#2861a8" stroke-width="3" marker-end="url(#arrow)"/><text x="30" y="650" class="note">RED = power route. BLUE = data/control. GREEN = supported sensor/operator link.</text><text x="30" y="685" class="note">Conceptual connections only: this is not a connector pinout or a validated aircraft design.</text></svg><figcaption>Whole-system wiring</figcaption></figure>
+
+<p>Read red lines as <strong>power routes</strong>, blue as <strong>data/control routes</strong>, green as <strong>supported sensor/operator connections</strong>. These are conceptual diagrams, not pin-number drawings. Matching two connectors by appearance is not an electrical compatibility check.</p>
+<h2 id="2-choose-one-build-path-not-a-mixture-of-unrelated-shopping-lists">2. Choose one build path, not a mixture of unrelated shopping lists</h2>
+<h3 id="path-a-your-first-aircraft">Path A — your first aircraft</h3>
+<p>Purchase a supported airframe/propulsion/controller development kit with complete assembly instructions and documented battery/charger requirements. Add a compatible radio control system and the supported ground station. Keep the inspection payload small at first, or collect imagery using the kit's supported payload mounting approach and process it on the ground.</p>
+<h3 id="minimum-packing-list-categories-for-a-conventional-quad-kit">Minimum packing-list categories for a conventional quad kit</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Usual count to account for</th>
+<th>Check against the exact kit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Airframe/landing structure</td>
+<td>One complete assembly</td>
+<td>Correct plates/arms/landing parts and all fasteners</td>
+</tr>
+<tr>
+<td>Motors</td>
+<td>Four matched units</td>
+<td>Kit-prescribed motor and mounting screws</td>
+</tr>
+<tr>
+<td>ESC channels</td>
+<td>Four channels, discrete or supported integrated assembly</td>
+<td>Matched motor/battery ratings and signal protocol</td>
+</tr>
+<tr>
+<td>Propellers</td>
+<td>Full manufacturer-specified rotation/type set plus appropriate spares</td>
+<td>Correct size, attachment and rotation pattern; remain off during bench work</td>
+</tr>
+<tr>
+<td>Controller/power system</td>
+<td>One supported controller and its approved supply/measurement arrangement</td>
+<td>Revision-specific cables and manuals</td>
+</tr>
+<tr>
+<td>Navigation/operator link</td>
+<td>Supported GNSS and independent RC equipment as required</td>
+<td>Kit inclusions vary; do not assume both radios are supplied</td>
+</tr>
+<tr>
+<td>Battery/charger</td>
+<td>Supported pack and matching charger</td>
+<td>Usually separately selected; confirm actual bundle</td>
+</tr>
+<tr>
+<td>Data/logging/mounts</td>
+<td>Supported log storage, setup cable and all required mounts</td>
+<td>Review what the exact SKU excludes</td>
+</tr>
+</tbody>
+</table>
+<p>The count table organizes purchasing; it does not override the manufacturer's matched component specification.</p>
+<h3 id="path-b-add-a-recordingai-payload">Path B — add a recording/AI payload</h3>
+<p>After the base vehicle is commissioned, measure a candidate companion/camera system on a bench. A Pi 5 can be a recording/low-rate inference candidate; a Jetson Orin Nano carrier/module can be a GPU inference candidate. Both need compatible OS, regulated power, cooling, storage and reliable mounting. The kit's payload rating must include all of those items. If it cannot carry them with the required performance margin, choose a different rated platform rather than improvising a motor/battery upgrade.</p>
+<h3 id="path-c-custom-kit-or-custom-controller">Path C — custom kit or custom controller</h3>
+<p>Do this only after Path A works and you can compare against a known-good system. The advanced guide covers mechanical design, electrical design, firmware and validation. There are no flight-qualified custom Gerber files or fabricated boards in this repository.</p>
+<h2 id="3-organize-your-project-before-spending-money">3. Organize your project before spending money</h2>
+<p>Make these folders outside the source tree for your physical build records:</p>
+<pre><code class="language-text">my-aircraft-build/
+  01-manuals-and-datasheets/
+  02-parts-and-serial-numbers/
+  03-wiring-and-photos/
+  04-power-and-mass-measurements/
+  05-firmware-and-parameters/
+  06-bench-results/
+  07-flight-and-camera-logs/
+</code></pre>
+<p>Download exact model/revision manuals and save their source URLs and dates. Copy the repository's <a href="https://github.com/crazycrafters/AERIS-Rail-Autonomous-UAV/blob/main/examples/hardware/prototype_bom.csv">BOM worksheet</a>, <a href="https://github.com/crazycrafters/AERIS-Rail-Autonomous-UAV/blob/main/examples/hardware/wire_schedule.csv">wire schedule</a>, <a href="https://github.com/crazycrafters/AERIS-Rail-Autonomous-UAV/blob/main/examples/hardware/assembly_checklist.csv">assembly checklist</a>, <a href="https://github.com/crazycrafters/AERIS-Rail-Autonomous-UAV/blob/main/examples/hardware/motor_map.csv">motor map</a>, and <a href="https://github.com/crazycrafters/AERIS-Rail-Autonomous-UAV/blob/main/examples/hardware/power_and_mass.csv">power worksheet</a>. Fill in actual parts and measurements. Blank cells are outstanding work, not approval.</p>
+<p>Before ordering, verify the complete kit configuration with the vendor. These are the questions to answer:</p>
+<ul>
+<li>Does this SKU include the frame, four matched motors, four ESCs or a matched integrated board, propellers, landing gear, controller, power module, GNSS and mounting hardware?</li>
+<li>Which battery cell count/voltage, connector, charger and battery mounting are supported?</li>
+<li>What additional receiver/transmitter and telemetry equipment is needed?</li>
+<li>Which exact controller board, revision, cables, firmware target and airframe configuration apply?</li>
+<li>What is the <strong>documented</strong> payload envelope, and which flight-time claims include which payload and battery?</li>
+<li>What is the return/support process if a camera or driver does not work with your computer?</li>
+</ul>
+<p>Do not infer kit contents from an old video. A product family can have several incompatible bundles.</p>
+<h2 id="4-tools-and-supplies">4. Tools and supplies</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Purpose / beginner rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Manufacturer-specified hex drivers/screwdrivers</td>
+<td>Use the right size to avoid damaged fasteners</td>
+</tr>
+<tr>
+<td>Multimeter with suitable rated probes</td>
+<td>Verify polarity/voltage and continuity with an instructor; never measure current by placing current-mode probes across a battery</td>
+</tr>
+<tr>
+<td>Manufacturer-specified fasteners/mounts</td>
+<td>Use supplied sizes; screws that are too long can contact motor windings</td>
+</tr>
+<tr>
+<td>Strain relief, suitable cable ties and protective sleeving</td>
+<td>Prevent wires reaching propellers, sharp carbon edges or hot parts</td>
+</tr>
+<tr>
+<td>Labels and notebook</td>
+<td>Give each harness and motor a stable ID</td>
+</tr>
+<tr>
+<td>Supported battery charger and charge area</td>
+<td>Match chemistry and cell count; supervise charging using the battery/charger instructions</td>
+</tr>
+<tr>
+<td>Eye protection and appropriate work area</td>
+<td>Especially for cutting, soldering and motor commissioning</td>
+</tr>
+<tr>
+<td>Soldering tools only if the kit requires them</td>
+<td>Teacher/qualified builder handles soldering; avoid hand-made high-current harnesses for a first build</td>
+</tr>
+<tr>
+<td>Bench supply/current limiting when suitable</td>
+<td>For qualified low-voltage electronics bring-up; not a universal substitute for the kit's battery/power instructions</td>
+</tr>
+</tbody>
+</table>
+<p>Buy approved pre-made cables where possible. A connector shell can hide the wrong pin order. Do not rely on wire color alone. Follow the kit's specified thread-locking/torque instructions: a product suitable for metal threads may damage plastic or be unsuitable near electrical parts.</p>
+<h2 id="5-mechanical-assembly-build-a-frame-not-a-pile-of-modules">5. Mechanical assembly: build a frame, not a pile of modules</h2>
+<figure><svg xmlns="http://www.w3.org/2000/svg" width="1100" height="720" viewBox="0 0 1100 720" role="img" aria-labelledby="title desc"><title id="title">AERIS: organize the aircraft before connecting wires</title><desc id="desc">Conceptual quad X top view with physical motor locations and protected center decks.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs><style>text{font-family:Arial,sans-serif;fill:#162337}.title{font-size:26px;font-weight:bold}.label{font-size:18px;font-weight:bold}.small{font-size:15px}.note{font-size:17px}</style><rect width="100%" height="100%" fill="#fff"/><text x="30" y="42" class="title">AERIS: organize the aircraft before connecting wires</text><text x="30" y="80" class="note">View from above. FRONT is the flight-controller arrow direction after verified mounting.</text><path d="M 260 200 L 830 540 M 830 200 L 260 540" stroke="#b8c6d7" stroke-width="45"/><circle cx="260" cy="200" r="75" fill="#f2f5f8" stroke="#52647b" stroke-width="3"/><text x="212" y="192" class="small">Front-left</text><text x="205" y="215" class="small">Motor identity</text><text x="205" y="237" class="small">NOT output #</text><circle cx="830" cy="200" r="75" fill="#f2f5f8" stroke="#52647b" stroke-width="3"/><text x="782" y="192" class="small">Front-right</text><text x="775" y="215" class="small">Motor identity</text><text x="775" y="237" class="small">NOT output #</text><circle cx="260" cy="540" r="75" fill="#f2f5f8" stroke="#52647b" stroke-width="3"/><text x="212" y="532" class="small">Rear-left</text><text x="205" y="555" class="small">Motor identity</text><text x="205" y="577" class="small">NOT output #</text><circle cx="830" cy="540" r="75" fill="#f2f5f8" stroke="#52647b" stroke-width="3"/><text x="782" y="532" class="small">Rear-right</text><text x="775" y="555" class="small">Motor identity</text><text x="775" y="577" class="small">NOT output #</text><rect x="400" y="230" width="300" height="95" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="415" y="258" class="label" style="font-size:18.0px">Top / protected deck</text><text x="415" y="283" class="small" style="font-size:15.0px">Controller near center</text><text x="415" y="305" class="small" style="font-size:15.0px">Arrow and orientation verified</text><rect x="400" y="355" width="300" height="95" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="415" y="383" class="label" style="font-size:18.0px">Payload / lower deck</text><text x="415" y="408" class="small" style="font-size:15.0px">Computer secured and cooled</text><text x="415" y="430" class="small" style="font-size:15.0px">Camera clear of legs/propellers</text><polyline points="550,200 550,105" fill="none" stroke="#32804b" stroke-width="3" marker-end="url(#arrow)"/><text x="575" y="150" class="note">FRONT</text><text x="30" y="650" class="note">Place battery to meet kit center-of-gravity guidance; secure every payload against movement.</text><text x="30" y="685" class="note">No dimensions, motor numbers or rotation arrows are prescribed: copy the exact airframe mapping.</text></svg><figcaption>Airframe organization</figcaption></figure>
+
+<p>The drawing labels <strong>physical positions</strong>, not PX4 motor numbers. It is not dimensioned or a mounting-hole template.</p>
+<ol>
+<li>Lay out and identify the kit parts against its packing list. Photograph them before assembly.</li>
+<li>Read the entire kit assembly manual, including wiring routes, before tightening parts into inaccessible spaces.</li>
+<li>Assemble the arms/plates/landing gear in the documented order. Do not drill structural parts or substitute screw lengths casually.</li>
+<li>Mount each matched motor/ESC using the kit instructions. Check that wires are not pinched and rotating parts are unobstructed. <strong>Do not fit propellers.</strong></li>
+<li>Install the power module/distribution using its insulation and mounting instructions. Carbon-fiber plates can conduct electricity; exposed conductors must not rest on them.</li>
+<li>Mount the flight controller using the supplied isolation/orientation method. Record the board arrow direction and any required firmware orientation setting. Do not stack it directly on a noisy power converter just because the mounting holes line up.</li>
+<li>Mount the GNSS/compass/receiver as instructed, with appropriate separation from high-current wiring and obstructions.</li>
+<li>Position the battery mounting provision without connecting power. Verify the battery cannot slide and cables cannot reach propeller disks.</li>
+<li>Reserve a clear camera view and the measured companion's mounting space. The companion needs airflow and must not distort the controller's isolation mount.</li>
+<li>Check the completed mass and balance against the kit requirements. Photograph the top, bottom, each arm and every connector before closing plates.</li>
+</ol>
+<p>If a part needs bending, trimming, forcing or an undocumented adapter to fit, stop and resolve the mismatch from the actual manuals rather than forcing it into place.</p>
+<h2 id="6-motherboard-details-which-board-is-which">6. Motherboard details: which board is which?</h2>
+<p>There is <strong>not one universal UAV motherboard</strong>. Your build has several boards with different jobs.</p>
+<figure><svg xmlns="http://www.w3.org/2000/svg" width="1100" height="720" viewBox="0 0 1100 720" role="img" aria-labelledby="title desc"><title id="title">What the flight-controller motherboard does</title><desc id="desc">Logical flight-controller board blocks and interface categories; not a physical connector map.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs><style>text{font-family:Arial,sans-serif;fill:#162337}.title{font-size:26px;font-weight:bold}.label{font-size:18px;font-weight:bold}.small{font-size:15px}.note{font-size:17px}</style><rect width="100%" height="100%" fill="#fff"/><text x="30" y="42" class="title">What the flight-controller motherboard does</text><rect x="300" y="125" width="490" height="425" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="315" y="153" class="label" style="font-size:18.0px">Flight-controller board: logical functions</text><text x="315" y="178" class="small" style="font-size:14.7px">Not a photograph, scale drawing or actual pin arrangement</text><rect x="335" y="215" width="190" height="105" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="350" y="243" class="label" style="font-size:16.2px">Control processor</text><text x="350" y="268" class="small" style="font-size:13.2px">Real-time flight logic</text><text x="350" y="290" class="small" style="font-size:15.0px">Not the AI computer</text><rect x="565" y="215" width="190" height="105" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="580" y="243" class="label" style="font-size:17.2px">Inertial sensors</text><text x="580" y="268" class="small" style="font-size:10.8px">Gyroscopes + accelerometers</text><text x="580" y="290" class="small" style="font-size:10.8px">Pressure sensor as supplied</text><rect x="335" y="365" width="190" height="110" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="350" y="393" class="label" style="font-size:15.3px">Power / regulation</text><text x="350" y="418" class="small" style="font-size:14.5px">Approved power input</text><text x="350" y="440" class="small" style="font-size:12.6px">USB rules vary by board</text><rect x="565" y="365" width="190" height="110" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="580" y="393" class="label" style="font-size:13.8px">Logging / interfaces</text><text x="580" y="418" class="small" style="font-size:13.9px">Supported log storage</text><text x="580" y="440" class="small" style="font-size:12.1px">Signal buses and outputs</text><rect x="20" y="120" width="250" height="85" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="35" y="148" class="label" style="font-size:18.0px">POWER</text><text x="35" y="173" class="small" style="font-size:15.0px">Approved power module</text><polyline points="270,162 300,162" fill="none" stroke="#2861a8" stroke-width="3" marker-end="url(#arrow)"/><rect x="20" y="270" width="250" height="85" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="35" y="298" class="label" style="font-size:18.0px">GNSS / RC</text><text x="35" y="323" class="small" style="font-size:15.0px">Exact port depends on kit</text><polyline points="270,312 300,312" fill="none" stroke="#2861a8" stroke-width="3" marker-end="url(#arrow)"/><rect x="20" y="420" width="250" height="85" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="35" y="448" class="label" style="font-size:18.0px">USB / TELEM</text><text x="35" y="473" class="small" style="font-size:15.0px">MAVLink to companion</text><polyline points="270,462 300,462" fill="none" stroke="#2861a8" stroke-width="3" marker-end="url(#arrow)"/><rect x="830" y="120" width="250" height="85" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="845" y="148" class="label" style="font-size:18.0px">ACTUATOR outputs</text><text x="845" y="173" class="small" style="font-size:15.0px">Signals to ESCs</text><polyline points="790,162 830,162" fill="none" stroke="#2861a8" stroke-width="3" marker-end="url(#arrow)"/><rect x="830" y="270" width="250" height="85" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="845" y="298" class="label" style="font-size:18.0px">CAN / I2C</text><text x="845" y="323" class="small" style="font-size:15.0px">Supported peripherals</text><polyline points="790,312 830,312" fill="none" stroke="#2861a8" stroke-width="3" marker-end="url(#arrow)"/><rect x="830" y="420" width="250" height="85" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="845" y="448" class="label" style="font-size:18.0px">Status / logging</text><text x="845" y="473" class="small" style="font-size:15.0px">LEDs, buzzer, log card</text><polyline points="790,462 830,462" fill="none" stroke="#2861a8" stroke-width="3" marker-end="url(#arrow)"/><text x="30" y="620" class="note">A computer carrier board has different ports: power, USB/CSI, storage, network and optional UART.</text><text x="30" y="660" class="note">Do not identify a connector by shape or wire color. Use exact model + revision + official drawing.</text></svg><figcaption>Controller logical functions</figcaption></figure>
+
+<p>This is a functional drawing. Its connector positions do not match any specific Pixhawk board.</p>
+<h3 id="flight-controller-board">Flight-controller board</h3>
+<ul>
+<li>Main microcontroller executes the real-time flight firmware.</li>
+<li>Inertial sensors measure rotation/acceleration; supplied pressure sensing supports estimation.</li>
+<li>Power circuitry supplies regulated internal rails and monitors health.</li>
+<li>Actuator outputs send command signals to ESCs; motor current does not flow through those signal pins.</li>
+<li>GNSS/RC/telemetry/peripheral interfaces connect supported devices.</li>
+<li>Logging storage, status indications and debug/boot interfaces depend on the board.</li>
+</ul>
+<p>Use the exact board's <strong>pinout/connector diagram</strong> and PX4 hardware documentation. Some components are internal and must not be probed or modified by a beginner.</p>
+<h3 id="companion-boardcarrier">Companion board/carrier</h3>
+<p>A Pi or Jetson carrier exposes computer power, storage, USB, network and supported camera/serial interfaces. It runs Linux and the image pipeline. A Jetson compute module is not the same as its carrier: carrier input voltage and connector layout come from the carrier manual.</p>
+<h3 id="escpower-boards">ESC/power boards</h3>
+<p>An ESC contains power switches/control electronics for its motor. A distribution board routes battery power. A power module can also measure voltage/current and provide an approved controller supply. A four-in-one board can combine functions, but this does not make its pinout universal.</p>
+<h2 id="7-make-the-wire-schedule-before-connecting-the-wires">7. Make the wire schedule before connecting the wires</h2>
+<p>For each cable write source device, exact source connector/pin, destination connector/pin, signal name, electrical level/rating, cable part number and official drawing reference. Have a qualified builder compare the completed schedule to both device manuals. The <a href="https://github.com/crazycrafters/AERIS-Rail-Autonomous-UAV/blob/main/examples/hardware/wire_schedule.csv">wire schedule</a> deliberately leaves model-specific pins blank.</p>
+<h3 id="connection-order">Connection order</h3>
+<p>Work unpowered, propellers removed, in the kit's documented order:</p>
+<ol>
+<li>Motor/ESC power connections and motor phases exactly as supplied/instructed.</li>
+<li>Approved power-module/distribution input and flight-controller supply connector.</li>
+<li>ESC command/ground connections to the documented controller actuator outputs.</li>
+<li>GNSS/compass and receiver using the exact supported cables/ports.</li>
+<li>Telemetry hardware if required by the chosen configuration.</li>
+<li>Controller USB to the setup computer for the first firmware/configuration stage, following USB/power instructions.</li>
+<li>Only after the aircraft baseline is commissioned: separately qualified companion power and camera link.</li>
+</ol>
+<p>Do not power a Jetson or Pi from TELEM. Do not join multiple supply outputs without an approved power arrangement. Never attach a battery directly to GPIO, UART or a USB camera.</p>
+<h3 id="power-diagram">Power diagram</h3>
+<pre><code class="language-text">KIT-MATCHED BATTERY
+    |
+    +-- rated distribution ------------------&gt; ESCs --&gt; motors
+    |
+    +-- approved controller power module ----&gt; flight-controller power input
+    |
+    +-- qualified dedicated regulator --------&gt; companion's specified power input
+                                                   |
+                                                   +--&gt; supported camera/storage power
+</code></pre>
+<p>Only use the final branch after verifying regulator input range, output, peak/steady load, cooling, polarity and grounding with the actual hardware. Camera/storage power may require a separately rated supply arrangement; a USB port is not an unlimited power source.</p>
+<h2 id="8-companion-connection-usb-first">8. Companion connection: USB first</h2>
+<figure><svg xmlns="http://www.w3.org/2000/svg" width="1100" height="720" viewBox="0 0 1100 720" role="img" aria-labelledby="title desc"><title id="title">Companion link: USB first, qualified UART later</title><desc id="desc">Signal direction and power separation for connecting a companion computer.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/></marker></defs><style>text{font-family:Arial,sans-serif;fill:#162337}.title{font-size:26px;font-weight:bold}.label{font-size:18px;font-weight:bold}.small{font-size:15px}.note{font-size:17px}</style><rect width="100%" height="100%" fill="#fff"/><text x="30" y="42" class="title">Companion link: USB first, qualified UART later</text><rect x="40" y="115" width="385" height="145" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="55" y="143" class="label" style="font-size:18.0px">Controller: verified UART port</text><text x="55" y="168" class="small" style="font-size:15.0px">TX output</text><text x="55" y="190" class="small" style="font-size:15.0px">RX input</text><text x="55" y="212" class="small" style="font-size:15.0px">Signal reference ground</text><text x="55" y="234" class="small" style="font-size:15.0px">Supply pin: not joined by this drawing</text><rect x="675" y="115" width="385" height="145" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="690" y="143" class="label" style="font-size:17.5px">Companion: qualified UART interface</text><text x="690" y="168" class="small" style="font-size:15.0px">RX input</text><text x="690" y="190" class="small" style="font-size:15.0px">TX output</text><text x="690" y="212" class="small" style="font-size:15.0px">Required ground reference</text><text x="690" y="234" class="small" style="font-size:15.0px">Logic voltage must match</text><polyline points="425,170 675,170" fill="none" stroke="#2861a8" stroke-width="3" marker-end="url(#arrow)"/><polyline points="675,193 425,193" fill="none" stroke="#2861a8" stroke-width="3" marker-end="url(#arrow)"/><polyline points="425,215 675,215" fill="none" stroke="#32804b" stroke-width="3" marker-end="url(#arrow)"/><text x="455" y="150" class="small">Cross TX to RX</text><rect x="40" y="340" width="385" height="115" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="55" y="368" class="label" style="font-size:18.0px">USB bench alternative</text><text x="55" y="393" class="small" style="font-size:15.0px">Use supported controller USB port</text><text x="55" y="415" class="small" style="font-size:15.0px">Check power/back-power rules</text><text x="55" y="437" class="small" style="font-size:15.0px">No hand-made UART pin wiring first</text><rect x="675" y="340" width="385" height="115" rx="12" fill="#eaf0f9" stroke="#52647b" stroke-width="2"/><text x="690" y="368" class="label" style="font-size:18.0px">Companion USB host</text><text x="690" y="393" class="small" style="font-size:15.0px">Stable device identity + permissions</text><text x="690" y="415" class="small" style="font-size:15.0px">Configure MAVLink on the real port</text><text x="690" y="437" class="small" style="font-size:15.0px">No aircraft command from camera model</text><polyline points="425,395 675,395" fill="none" stroke="#2861a8" stroke-width="3" marker-end="url(#arrow)"/><text x="40" y="535" class="note">This drawing intentionally has NO pin numbers: they depend on the purchased boards and adapters.</text><text x="40" y="575" class="note">1.8 V and 3.3 V logic are not interchangeable. TTL UART is not RS-232.</text><text x="40" y="615" class="note">Use official pre-made cables where available; do not connect a Pi/Jetson power rail to TELEM.</text><text x="40" y="655" class="note">Keep propellers removed during wiring and controller output identification.</text></svg><figcaption>USB and UART concepts</figcaption></figure>
+
+<p>For first bench integration, use a supported USB data connection between controller and companion. Check the devices' allowed powering/back-powering arrangement. Confirm device identity and permissions; do not assume the same <code>/dev/ttyACM0</code> name after every reboot.</p>
+<p>Only later design a UART harness:</p>
+<pre><code class="language-text">Controller TX       -&gt; compatible companion RX
+Controller RX       &lt;- compatible companion TX
+Required reference  &lt;-&gt; required reference, according to the interface documentation
+</code></pre>
+<p>TX means transmit; RX means receive. Match logic voltages: 1.8 V, 3.3 V and RS-232 are not interchangeable. Add an approved level/interface adapter if required. Supply pins are <strong>not</strong> part of this generic signal diagram. Flow-control wiring is included only if both ends support/configure it.</p>
+<p>Exact pin numbers cannot be chosen until the purchased boards/carriers and revisions are known. The correct beginner action is to copy the official pin drawing into your wire schedule, not to guess from this illustration. No off-the-shelf connector shape guarantees those signals are on the same pins.</p>
+<h2 id="9-first-electrical-checks-with-the-instructor">9. First electrical checks, with the instructor</h2>
+<p>Before connecting the flight battery:</p>
+<ul>
+<li>Verify all connectors against the wire schedule and physical orientation marks.</li>
+<li>Confirm the battery/charger/ESC/power-module voltage compatibility.</li>
+<li>Inspect for loose strands, reversed connectors, exposed pads, trapped wires and screws contacting electronics.</li>
+<li>Check the manufacturer's permitted USB and power-module combinations.</li>
+<li>Use continuity/polarity measurements only as taught for the circuit. Capacitors and semiconductor paths can make a continuity beep ambiguous; do not interpret it as a complete electrical test.</li>
+<li>Test a new companion regulator separately with qualified current limiting/load testing before attaching the computer.</li>
+<li>Remove propellers, loose tools and conductive debris from the test area.</li>
+</ul>
+<p>Power up using the kit's documented sequence. If unexpected heat, smell, smoke or unstable voltage appears, disconnect using the appropriate safe method and diagnose unpowered. Do not repeatedly reconnect to see whether the fault goes away.</p>
+<p>Record the observed input/rail voltages, idle current where properly measured, temperatures and status indications. A flashing LED means something board-specific; consult its manual rather than guessing that it is normal.</p>
+<h2 id="10-install-firmware-and-configure-the-base-aircraft">10. Install firmware and configure the base aircraft</h2>
+<p>Use the supported ground-station version and the exact board firmware target.</p>
+<ol>
+<li>Record the controller model/revision and firmware release.</li>
+<li>Install the supported firmware using the official board workflow.</li>
+<li>Choose the correct airframe geometry/configuration, not just something called “quadcopter.”</li>
+<li>Set controller orientation to match physical mounting, then perform required sensor calibration.</li>
+<li>Configure receiver/protocol and verify channel direction, neutral values and operating modes in the setup interface.</li>
+<li>Configure battery voltage/current measurement using the supported power module's calibration procedure.</li>
+<li>Configure the applicable geofence, battery, RC/link-loss and mission contingencies.</li>
+<li>Follow the supported actuator setup/output identification described next.</li>
+<li>Export the reviewed parameters, firmware identity and configuration screenshots.</li>
+</ol>
+<p>Do not disable arming checks to get past an unexplained error. Some calibration requires an appropriate environment; indoor GNSS failure is not a reason to fake position health. The flight controller's supplied manual is authoritative for its procedures.</p>
+<h2 id="11-mixing-how-four-motors-work-together">11. “Mixing”: how four motors work together</h2>
+<p>The relevant ideas are <strong>airframe geometry</strong>, <strong>actuator mapping</strong>, <strong>ESC protocol</strong> and <strong>control allocation/mixing</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Physical location</td>
+<td>Front-left/front-right/rear-left/rear-right relative to the configured body frame</td>
+</tr>
+<tr>
+<td>Motor identity</td>
+<td>The motor identifier shown by the selected firmware/airframe setup</td>
+</tr>
+<tr>
+<td>Output assignment</td>
+<td>Which real output connector sends that motor's command</td>
+</tr>
+<tr>
+<td>ESC protocol</td>
+<td>The supported command format configured for the ESC/output hardware</td>
+</tr>
+<tr>
+<td>Rotation direction</td>
+<td>Which way the motor/propeller combination must turn in the selected airframe scheme</td>
+</tr>
+<tr>
+<td>Mixer/control allocator</td>
+<td>Firmware logic that distributes desired forces/torques across actuators</td>
+</tr>
+</tbody>
+</table>
+<p>For a conventional quad, changing thrust differences produces roll/pitch, and the appropriate rotation pattern supports yaw torque. The exact mapping/signs depend on the selected configuration. <strong>Do not program a homemade Python motor mixer for this beginner build.</strong> PX4 provides the aircraft control allocation; AERIS handles inspection evidence, not per-motor stabilization.</p>
+<h3 id="motor-mapping-procedure-propellers-removed">Motor mapping procedure — propellers removed</h3>
+<ol>
+<li>Open the actuator/motor setup for the exact airframe and firmware release.</li>
+<li>Save its diagram/screenshot in your build records.</li>
+<li>In the kit's prescribed bench configuration, use the ground station's supported output-identification function with the qualified builder controlling the test area.</li>
+<li>Observe which physical motor corresponds to each displayed motor identity/output. Record it in <a href="https://github.com/crazycrafters/AERIS-Rail-Autonomous-UAV/blob/main/examples/hardware/motor_map.csv">motor_map.csv</a>.</li>
+<li>Verify the prescribed rotation using the kit/ESC/firmware method. If it is wrong, follow that manufacturer's correction process. Different ESC protocols support different methods; do not assume one generic “reverse” instruction applies.</li>
+<li>Check that the configured airframe, assignments, wiring and observed movement agree for every motor.</li>
+<li>Stop and resolve any mismatch before continuing. Save the resulting mapping and configuration.</li>
+</ol>
+<p>There is intentionally no universal “motor 1 = front-left” table in this manual. Copying numbering from a different firmware or frame can create a dangerous configuration.</p>
+<p>Propellers stay off until all bench work is finished and the operator is ready for the aircraft manufacturer's supervised flight commissioning procedure. Propeller type/orientation, fastener torque and mounting method must match the exact motor/airframe rotation scheme. Never attach them just to make an indoor test look like a drone.</p>
+<h2 id="12-configure-and-test-the-camera-payload-on-the-bench">12. Configure and test the camera payload on the bench</h2>
+<p>Choose a camera/lens using the <a href="https://github.com/crazycrafters/AERIS-Rail-Autonomous-UAV/blob/main/docs/uav_hardware_and_connections.md">hardware guide</a>, not the word “4K” alone. Verify driver support for the actual OS/architecture before buying. A supported USB camera is usually easier for a beginner than a CSI module requiring a custom driver.</p>
+<ol>
+<li>Connect the camera to a supported computer using its documented power/data arrangement.</li>
+<li>Install its official driver/SDK or use the supported OS camera path.</li>
+<li>Capture original-resolution pictures of a measured mock inspection target.</li>
+<li>Set and record exposure/focus/gain. Check image edges, lighting variation, blur, timestamp behavior and dropped frames.</li>
+<li>Test the lens and camera geometry against the smallest target feature. Enlarging a blurred image does not add detail.</li>
+<li>Measure sustained recording, storage and processing rates.</li>
+<li>Repeat on the intended companion, using its own supported OS and drivers.</li>
+</ol>
+<p>On Linux a V4L2 camera may be inspectable using <code>v4l2-ctl</code>; vendor-SDK and CSI cameras can require different tools. Do not assume <code>/dev/video0</code> identifies the same camera every time.</p>
+<h2 id="13-bring-aeris-into-the-build">13. Bring AERIS into the build</h2>
+<p>Use the exact commands in the <a href="https://github.com/crazycrafters/AERIS-Rail-Autonomous-UAV/blob/main/docs/implementation_guide.md">implementation guide</a> for environment setup and training. The intended flow is:</p>
+<pre><code class="language-text">Annotate UAV images on workstation
+    -&gt; validate dataset -&gt; train -&gt; best.pt + class map + threshold + provenance
+    -&gt; copy the validated artifact set to companion
+    -&gt; camera captures local files
+    -&gt; AERIS prediction -&gt; saved evidence -&gt; human review / offline mission replay
+</code></pre>
+<p>For a first companion inference check after compatible dependencies are installed:</p>
+<pre><code class="language-sh">python -m aeris.vision predict --weights /absolute/path/to/best.pt --source /absolute/path/to/captures --conf 0.25 --imgsz 1024 --device cpu --output outputs/first-companion-test
+</code></pre>
+<p>Replace threshold/input size with your validation-selected values. <code>--device 0</code> is for a separately validated CUDA stack, not a shortcut to make GPU hardware work. The desktop dependency installation is not an automatic Jetson/Pi installation recipe.</p>
+<p>The current code processes recorded images. It does <strong>not</strong> automatically start a live camera, associate images with real telemetry, fly the route, avoid obstacles or land on a dock. Those integration components are described in the implementation/hardware guides and must be developed and tested separately.</p>
+<h2 id="14-ground-tests-before-flight">14. Ground tests before flight</h2>
+<p>Complete and photograph these independently:</p>
+<ul>
+<li>Mechanical inspection and complete mass/balance record.</li>
+<li>Power/voltage/thermal checks and camera/compute sustained-load test.</li>
+<li>Controller orientation/sensor/receiver/actuator configuration.</li>
+<li>Verified physical motor/output/rotation map, with propellers removed.</li>
+<li>Telemetry recording and manufacturer-supported contingency checks.</li>
+<li>Camera resolution/quality check and offline model error review.</li>
+<li>Simulator route, return and interruption behavior as documented in the implementation guide.</li>
+</ul>
+<p>If the companion loses power, the base vehicle's intended contingency must remain defined. If camera/inference fails, coverage stays unresolved. Do not interpret empty predictions as a verified healthy railway.</p>
+<h2 id="15-first-flight-is-a-different-activity-from-assembly">15. First flight is a different activity from assembly</h2>
+<p>Use a qualified operator, appropriate site/permissions and the kit's documented commissioning procedure. Start with the aircraft baseline before adding an unverified payload or autonomous inspection requests. Keep the independent operator control path and follow the operating limits. Do not test over people, trains or an active railway as a school integration experiment.</p>
+<p>After each approved test, inspect fasteners/wiring, battery condition, vibration, temperatures, aircraft logs and image quality. Add the payload only after its mass/power/mounting have been accepted for the platform. Keep the inspection software passive at first: record images, evaluate on the ground, and compare against independent labels.</p>
+<h2 id="16-troubleshooting-for-beginners">16. Troubleshooting for beginners</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>What to check next</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parts do not fit</td>
+<td>Exact kit/revision and assembly step; do not force or drill without reviewed design changes</td>
+</tr>
+<tr>
+<td>Controller has no power</td>
+<td>Approved supply path, voltage/polarity and connector drawing; do not try random pins</td>
+</tr>
+<tr>
+<td>Computer reboots when camera starts</td>
+<td>Regulator/USB startup current, voltage drop, cable and thermal load</td>
+</tr>
+<tr>
+<td>No controller USB device</td>
+<td>Data-capable cable, supported port/power mode and OS permissions</td>
+</tr>
+<tr>
+<td>No GNSS indoors</td>
+<td>Expected reception limits; use the specified test environment, not fake health flags</td>
+</tr>
+<tr>
+<td>Wrong motor moves in setup</td>
+<td>Output assignments and exact airframe mapping; props remain removed</td>
+</tr>
+<tr>
+<td>Camera not visible</td>
+<td>Driver/SDK/ARM64 support, cable bandwidth, power and OS image</td>
+</tr>
+<tr>
+<td>Good workstation inference but poor onboard behavior</td>
+<td>Same model hash/preprocessing, supported runtime, thermal throttling and dropped frames</td>
+</tr>
+<tr>
+<td>High detector score at wrong asset</td>
+<td>Missing pose/time/asset association; do not count correct coverage</td>
+</tr>
+</tbody>
+</table>
+<h2 id="17-what-this-manual-cannot-honestly-supply-yet">17. What this manual cannot honestly supply yet</h2>
+<p>It cannot supply exact purchased-board pin numbers, screw torques, propeller rotation assignments or a guaranteed payload/endurance because the exact SKU/revision and completed payload are not selected. The worksheets tell you precisely what to obtain from those manuals. Nor does the repository contain a fabrication-ready custom frame/controller or validated physical dock.</p>
+<p>You can still begin now: review the candidate kit's official instructions, fill the BOM and manuals folder, test sample imagery on a workstation, and select the camera/companion based on measured requirements. Keep the custom-controller project separate until you can validate it against a working reference aircraft.</p>
+<h2 id="18-official-instructions-to-keep-beside-this-manual">18. Official instructions to keep beside this manual</h2>
+<ul>
+<li>Exact Holybro kit and Pixhawk documentation: https://docs.holybro.com/</li>
+<li>PX4 assembly, hardware and airframes: https://docs.px4.io/main/en/assembly/ and https://docs.px4.io/main/en/airframes/</li>
+<li>PX4 actuator configuration: https://docs.px4.io/main/en/config/actuators.html</li>
+<li>PX4 flight-controller hardware: https://docs.px4.io/main/en/flight_controller/</li>
+<li>QGroundControl setup documentation: https://docs.qgroundcontrol.com/</li>
+<li>NVIDIA Jetson / JetPack: https://developer.nvidia.com/embedded/jetson and https://developer.nvidia.com/embedded/jetpack</li>
+<li>Raspberry Pi documentation: https://www.raspberrypi.com/documentation/</li>
+</ul>
+<p>These are official starting points; a current kit-specific compatibility review and physical build have not been carried out in this documentation task.</p></body></html>

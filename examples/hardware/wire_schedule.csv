@@ -1,0 +1,12 @@
+wire_id,function,source_model_revision,source_connector,source_pin,destination_model_revision,destination_connector,destination_pin,signal_or_power,electrical_rating,official_reference,reviewed_by,verified_date
+W01,approved power module to controller,,,,,,,,,,,
+W02,ESC command connection / repeat per motor,,,,,,,,,,,
+W03,supported GNSS connection,,,,,,,,,,,
+W04,supported receiver connection,,,,,,,,,,,
+W05,controller USB data bench link,,,,,,,,,,,
+W06,dedicated companion regulator input,,,,,,,,,,,
+W07,dedicated companion regulator output,,,,,,,,,,,
+W08,camera data and rated power arrangement,,,,,,,,,,,
+W09,optional qualified UART TX to RX,,,,,,,,,,,
+W10,optional qualified UART RX from TX,,,,,,,,,,,
+W11,required UART reference per interface documentation,,,,,,,,,,,

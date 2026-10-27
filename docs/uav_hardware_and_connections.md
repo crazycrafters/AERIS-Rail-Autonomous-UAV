@@ -4,6 +4,8 @@ This is a prototype design and assembly guide, not a flight-qualified bill of ma
 
 For a first prototype, use a supported multirotor kit with a **separate flight controller and companion computer**. Start with passive image recording on an authorized closed course, then offline inference. Do not begin by making the inspection AI responsible for flight stabilization.
 
+For a beginner assembly sequence, start with the [illustrated student manual](hardware/student_build_manual.md) or its [printable HTML](hardware/student_build_manual.html). For custom frame/controller design, use the [advanced development guide](hardware/custom_airframe_and_controller.md).
+
 ## 1. Recommended architecture
 
 ```mermaid

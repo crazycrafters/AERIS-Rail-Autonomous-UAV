@@ -22,6 +22,8 @@ The smoke detector produced zero detection accuracy after one epoch. Its weights
 
 For CPU/camera selection, flight-controller wiring, power and OS choices, read the [UAV hardware and connection guide](uav_hardware_and_connections.md) and fill in the [BOM worksheet](../examples/hardware/prototype_bom.csv).
 
+For first-time physical assembly and motor mapping, use the [illustrated student build manual](hardware/student_build_manual.md). It links the wiring/mass/motor/checklist worksheets and a separate custom controller design roadmap.
+
 ## 1. Get the code and choose the local environment
 
 Suggested environment: Linux with Python 3.11 or 3.12. The image workflow was exercised with Python 3.12, CPU PyTorch 2.5.1, torchvision 0.20.1, and the direct dependency pins in `requirements-vision.txt`. macOS/Windows installation and GPU execution were not validated here.
